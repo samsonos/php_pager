@@ -231,7 +231,7 @@ class Pager implements iModuleViewable
 		$values = array();
 		
 		// Пробежимся по переменным класса
-		foreach( get_object_vars( $this ) as $var => $value ) $values[ $prefix.$var ] = $value;	
+		foreach( get_object_vars( $this ) as $var => $value ) $values[ $prefix.'_'.$var ] = $value;	
 		// Сгенерируем HTML представление
 		$values[ $prefix.'html' ] = $this->toHTML(); 
 		// Вернем коллекцию
