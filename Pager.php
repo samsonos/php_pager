@@ -107,7 +107,8 @@ class Pager implements iModuleViewable
 			$_SESSION['SamsonPager_current_page'] = $current_page;
 		}
 		// Если есть запись в сассии получим текущию страницу
-		else if ( isset($_SESSION['SamsonPager_current_page']) )$this->current_page = $_SESSION['SamsonPager_current_page'];		
+		//else if ( isset($_SESSION['SamsonPager_current_page']) )$this->current_page = $_SESSION['SamsonPager_current_page'];
+		else $this->current_page = 0;		
 		
 		// Безопасно получим размер страницы данных
 		$this->page_size = isset( $page_size ) ? $page_size : $this->page_size;
