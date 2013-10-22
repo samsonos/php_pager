@@ -108,7 +108,7 @@ class Pager implements iModuleViewable
 		}
 		// Если есть запись в сассии получим текущию страницу
 		//else if ( isset($_SESSION['SamsonPager_current_page']) )$this->current_page = $_SESSION['SamsonPager_current_page'];
-		else $this->current_page = 0;		
+		else $this->current_page = 1;		
 		
 		// Безопасно получим размер страницы данных
 		$this->page_size = isset( $page_size ) ? $page_size : $this->page_size;
@@ -229,13 +229,14 @@ class Pager implements iModuleViewable
 	 */
 	public function toView( $prefix = NULL, array $restricted = array() )
 	{	
-	// Результат
+		// Результат
 		$values = array();
 		
 		// Пробежимся по переменным класса
-		foreach( get_object_vars( $this ) as $var => $value ) $values[ $prefix.'_'.$var ] = $value;	
+		foreach( get_object_vars( $this ) as $var => $value ) $values[ $prefix.$var ] = $value;	
 		// Сгенерируем HTML представление
 		$values[ $prefix.'html' ] = $this->toHTML(); 
+	
 		// Вернем коллекцию
 		return $values;
 	}
