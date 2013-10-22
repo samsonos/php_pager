@@ -92,6 +92,7 @@ class Pager implements iModuleViewable
 	 *	 
 	 * @param number 	$current_page 	Номер текущей строки данных ( от 1 до $rows_count )  	 
      * @param number 	$page_size 		Количество строк данных отображаемых на одной странице
+     * @param string 	$url_prefix		Url prefix for pagination links
      * @param number 	$rows_count 	Общее количество строк данных
 	 */
 	public function __construct( $current_page = NULL, $page_size = NULL, $url_prefix = NULL, $rows_count = NULL )
