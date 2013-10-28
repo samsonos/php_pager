@@ -132,10 +132,15 @@ class Pager implements iModuleViewable
 		// Посчитаем общее кво страниц
 		$this->total = ceil( $this->rows_count / $this->page_size );	
 				
-		//if($this->current_page>$this->total) $this->current_page = $this->total;
-
+		// If page is out limits - fix it 
+		if( $rows_count > 0 )
+		{
+			if( $this->current_page > $this->total ) $this->current_page = $this->total;
+			else if( $this->current_page < 0 ) $this->current_page = 1;
+		}
+		
 		// Для расчетов, нумерация страниц начинается с 0
-		$this->_page_num = $this->current_page == 0 ? 0 : $this->current_page - 1;
+		$this->_page_num = $this->current_page == 0 ? 0 : $this->current_page - 1;	
 		
 		// Рассчитаем номер первого выводимой строки данных
 		$this->start = $this->_page_num * $this->page_size;		
