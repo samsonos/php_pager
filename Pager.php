@@ -114,7 +114,7 @@ class Pager implements iModuleViewable
 		$this->page_size = isset( $page_size ) ? $page_size : $this->page_size;
 
 		// Безопасно получим префикс для ссылок
-		$this->url_prefix = isset( $url_prefix ) ? $url_prefix : $this->url_prefix;
+		$this->url_prefix = locale_path().(isset( $url_prefix ) ? $url_prefix : $this->url_prefix);
 
 		// Рассчитаем параметры вывода
 		$this->update( $rows_count );
@@ -204,7 +204,7 @@ class Pager implements iModuleViewable
 		if($this->prev != 0) $html .= m('pager')->set( 'url', url()->build( $this->url_prefix, $this->prev ) )->output('prev_li.php');
 		
 		// Пункт меню для вывода всех строк данных
-		$html .= '<li><a class="__samson_pager_li '.$active.' __samson_pager_all" href="'.url()->build( $this->url_prefix, 0 ).'">Все</a></li>';
+		$html .= '<li><a class="__samson_pager_li '.$active.' __samson_pager_all" href="'.url()->build( $this->url_prefix, 0 ).'/">'.t('Все',true).'</a></li>';
 		
 		
 		
@@ -220,7 +220,7 @@ class Pager implements iModuleViewable
 			$html .= m('pager')	// Получим модуль постраничного вывода 
 			->set( 'class',$active  ) 	// Если это текущая страница					
 			->set( 'page_view', $p )  	// Установим представление
-			->set( 'url', url()->build( $this->url_prefix, $n ) )// Установим "правильную" ссылку
+			->set( 'url', url()->build( $this->url_prefix, $n ).'/' )// Установим "правильную" ссылку
 			->output('li.php');// Выведем представление			
 		}
 		if($this->next != 0) $html .= m('pager')->set( 'url', url()->build( $this->url_prefix, $this->next ) )->output('next_li.php');
