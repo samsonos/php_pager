@@ -15,6 +15,5 @@ use samson\core\iModuleViewable;
 class PagerConnector extends CompressableExternalModule
 {
 	/** Идентификатор модуля */
-	protected $id = 'pager';		
-			
+	protected $id = 'pager';			
 }

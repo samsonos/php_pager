@@ -203,8 +203,10 @@ class Pager implements iModuleViewable
 		
 		if($this->prev != 0) $html .= m('pager')->set( 'url', url()->build( $this->url_prefix, $this->prev ) )->output('prev_li.php');
 		
+		
 		// Пункт меню для вывода всех строк данных
-		$html .= '<li><a class="__samson_pager_li '.$active.' __samson_pager_all" href="'.url()->build( $this->url_prefix, 0 ).'/">'.t('Все',true).'</a></li>';
+		$all_html = class_exists('samson\i18n\i18n') ? t('Все',true) : 'Все';
+		$html .= '<li><a class="__samson_pager_li '.$active.' __samson_pager_all" href="'.url()->build( $this->url_prefix, 0 ).'/">'.$all_html.'</a></li>';
 		
 		
 		
