@@ -1,1 +1,1 @@
-{"name":"samsonos/pager","author":"Vitaly Iegorov <egorov@samsonos.com>","version":"0.0.1","require":{}}
+{"name":"samsonos/pager","author":"Vitaly Iegorov <egorov@samsonos.com>","version":"0.0.1","require":{"samsonos/core":"*"},"license":"Open Software License (OSL) v 3.0","homepage":"http://samsonos.com/"}
