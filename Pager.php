@@ -176,7 +176,10 @@ class Pager implements iModuleViewable
 		for ($i = $start; $i <= $end; $i++) $this->html_pages[ $i ] = $i;		
 		
 		// Всегда добавляем последнюю страницу
-		if($this->total) $this->html_pages[ $this->total ] = $this->total;	
+		if($this->total) {
+            $this->html_pages[ '...' ] = '...';
+            $this->html_pages[ $this->total ] = $this->total;
+        }
 		
 		if($this->total > $this->current_page) $this->next = $this->current_page+1;
 		else $this->next = 0;
@@ -217,13 +220,21 @@ class Pager implements iModuleViewable
 			
 			// Определим если єто текущая страница
 			$active = ($n == $this->current_page) ? 'active' : '';
-				
-			// Сформируем представление
-			$html .= m('pager')	// Получим модуль постраничного вывода 
-			->set( 'class',$active  ) 	// Если это текущая страница					
-			->set( 'page_view', $p )  	// Установим представление
-			->set( 'url', url()->build( $this->url_prefix, $n ).'/' )// Установим "правильную" ссылку
-			->output('li.php');// Выведем представление			
+            if ($n==1) $n='';
+
+			if ($n!='...'){
+                // Сформируем представление
+                $html .= m('pager')	// Получим модуль постраничного вывода
+                    ->set( 'class',$active  ) 	// Если это текущая страница
+                    ->set( 'page_view', $p )  	// Установим представление
+                    ->set( 'url', url()->build( $this->url_prefix, $n ).'/' )// Установим "правильную" ссылку
+                    ->output('li.php');// Выведем представление
+            } else {
+                $html.='<li><span>...</span></li>';
+
+
+            }
+
 		}
 		if($this->next != 0) $html .= m('pager')->set( 'url', url()->build( $this->url_prefix, $this->next ) )->output('next_li.php');
 		
