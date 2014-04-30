@@ -174,9 +174,9 @@ class Pager implements iModuleViewable
 
 		// Пробежимся между крайними значениями и запишем их в представление
 		for ($i = $start; $i <= $end; $i++) $this->html_pages[ $i ] = $i;		
-		
+
 		// Всегда добавляем последнюю страницу
-		if($this->total) {
+		if($this->total>1) {
             $this->html_pages[ '...' ] = '...';
             $this->html_pages[ $this->total ] = $this->total;
         }
@@ -212,22 +212,23 @@ class Pager implements iModuleViewable
 		$html .= '<li><a class="__samson_pager_li '.$active.' __samson_pager_all" href="'.url()->build( $this->url_prefix, 0 ).'/">'.$all_html.'</a></li>';
 		
 		
-		
-		// Переберем данные для представления 
+		// Переберем данные для представления
 		if(sizeof($this->html_pages) > 1) foreach ( $this->html_pages as $n => $p ) 
 		{
 			//trace($n.' - '.$p);
 			
 			// Определим если єто текущая страница
 			$active = ($n == $this->current_page) ? 'active' : '';
-            if ($n==1) $n='';
+
 
 			if ($n!='...'){
+                $url = url()->build( $this->url_prefix, $n ).'/';
+                if ($n==1) $url = url()->build( $this->url_prefix );
                 // Сформируем представление
                 $html .= m('pager')	// Получим модуль постраничного вывода
                     ->set( 'class',$active  ) 	// Если это текущая страница
                     ->set( 'page_view', $p )  	// Установим представление
-                    ->set( 'url', url()->build( $this->url_prefix, $n ).'/' )// Установим "правильную" ссылку
+                    ->set( 'url',  $url)// Установим "правильную" ссылку
                     ->output('li.php');// Выведем представление
             } else {
                 $html.='<li><span>...</span></li>';
