@@ -1,1 +1,1 @@
-<li><a class="__samson_pager_li <?php v('class')?>" href="<?php v('url')?>"><?php v('page_view')?></a></li>
+<li><a href="<?php v('url')?>"><span class="__samson_pager_li"><?php v('page_view')?></span></a></li>

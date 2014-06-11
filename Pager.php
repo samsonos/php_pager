@@ -218,7 +218,7 @@ class Pager implements iModuleViewable
 			//trace($n.' - '.$p);
 			
 			// Определим если єто текущая страница
-			$active = ($n == $this->current_page) ? 'active' : '';
+            $view = ($n == $this->current_page) ? 'current_li.php' : 'li.php';
 
 
 			if ($n!='...'){
@@ -229,7 +229,7 @@ class Pager implements iModuleViewable
                     ->set( 'class',$active  ) 	// Если это текущая страница
                     ->set( 'page_view', $p )  	// Установим представление
                     ->set( 'url',  $url)// Установим "правильную" ссылку
-                    ->output('li.php');// Выведем представление
+                    ->output($view);// Выведем представление
             } else {
                 $html.='<li><span>...</span></li>';
 
