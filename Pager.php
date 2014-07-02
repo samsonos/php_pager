@@ -88,10 +88,10 @@ class Pager implements iModuleViewable
     protected $_page_num;
 
     /** @var string Title of the next page button */
-    protected $nextTitle = 'Go to next page';
+    public $nextTitle = 'Go to next page';
 
     /** @var string Title of the previous page button */
-    protected $prevTitle = 'Go to next page';
+    public $prevTitle = 'Go to next page';
 
 
     /**
