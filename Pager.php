@@ -78,16 +78,23 @@ class Pager implements iModuleViewable
 	 * Коллекция страниц для HTML представления
 	 * @var array
 	 */
-	private $html_pages = array();
+    protected $html_pages = array();
 	
 	/**
 	 * Номер текущей строки данных ( от 0 до ($rows_count-1) )
 	 * Используется для внутренних расчетов
 	 * @var number
 	 */
-	private $_page_num;
-	
-	/**
+    protected $_page_num;
+
+    /** @var string Title of the next page button */
+    protected $nextTitle = 'Go to next page';
+
+    /** @var string Title of the previous page button */
+    protected $prevTitle = 'Go to next page';
+
+
+    /**
 	 * Конструктор
 	 *	 
 	 * @param number 	$current_page 	Номер текущей строки данных ( от 1 до $rows_count )  	 
@@ -101,7 +108,7 @@ class Pager implements iModuleViewable
 		// Если переданна требуемая страница
 		if (isset( $current_page )) 
 		{			
-			// Получим текущую страницу
+			// Установим текущую страницу
 			$this->current_page = $current_page;
 			// Запишем текущую страницу в сессию
 			$_SESSION['SamsonPager_current_page'] = $current_page;
@@ -117,7 +124,7 @@ class Pager implements iModuleViewable
 		$this->url_prefix = locale_path().(isset( $url_prefix ) ? $url_prefix : $this->url_prefix);
 
 		// Рассчитаем параметры вывода
-		$this->update( $rows_count );
+		$this->update($rows_count);
 	}
 
 	/**
@@ -183,6 +190,7 @@ class Pager implements iModuleViewable
 		
 		if($this->total > $this->current_page) $this->next = $this->current_page+1;
 		else $this->next = 0;
+
 		if($this->current_page > 1) $this->prev = $this->current_page-1;
 		else $this->prev = 0;
 		
@@ -203,23 +211,25 @@ class Pager implements iModuleViewable
 		
 		// Определим если єто текущая страница
 		$active = (('0' == $this->current_page) || (sizeof($this->html_pages) == 1)) ? 'active' : '';		
-		
-		if($this->prev != 0) $html .= m('pager')->set( 'url', url()->build( $this->url_prefix, $this->prev ) )->output('prev_li.php');
+
+        // If there is previous page - render button
+		if ($this->prev != 0) {
+            $html .= m('pager')
+                ->desc($this->nextTitle)
+                ->url(url()->build( $this->url_prefix, $this->prev))
+                ->output('prev_li.php');
+        }
 		
 		
 		// Пункт меню для вывода всех строк данных
 		$all_html = class_exists('samson\i18n\i18n') ? t('Все',true) : 'Все';
 		$html .= '<li><a class="__samson_pager_li '.$active.' __samson_pager_all" href="'.url()->build( $this->url_prefix, 0 ).'/">'.$all_html.'</a></li>';
 		
-		
 		// Переберем данные для представления
 		if(sizeof($this->html_pages) > 1) foreach ( $this->html_pages as $n => $p ) 
 		{
-			//trace($n.' - '.$p);
-			
 			// Определим если єто текущая страница
             $view = ($n == $this->current_page) ? 'current_li.php' : 'li.php';
-
 
 			if ($n!='...'){
                 $url = url()->build( $this->url_prefix, $n ).'/';
@@ -232,12 +242,16 @@ class Pager implements iModuleViewable
                     ->output($view);// Выведем представление
             } else {
                 $html.='<li><span>...</span></li>';
-
-
             }
-
 		}
-		if($this->next != 0) $html .= m('pager')->set( 'url', url()->build( $this->url_prefix, $this->next ) )->output('next_li.php');
+
+        // If there is next page - render button
+		if ($this->next != 0) {
+            $html .= m('pager')
+                ->desc($this->nextTitle)
+                ->url(url()->build( $this->url_prefix, $this->next))
+                ->output('next_li.php');
+        }
 		
 		// Вернем то что получили
 		return $html;
