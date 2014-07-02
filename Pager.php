@@ -215,7 +215,7 @@ class Pager implements iModuleViewable
         // If there is previous page - render button
 		if ($this->prev != 0) {
             $html .= m('pager')
-                ->desc($this->nextTitle)
+                ->desc($this->prevTitle)
                 ->url(url()->build( $this->url_prefix, $this->prev))
                 ->output('prev_li.php');
         }
