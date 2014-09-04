@@ -93,6 +93,9 @@ class Pager implements iModuleViewable
     /** @var string Title of the previous page button */
     public $prevTitle = 'Go to next page';
 
+    /** @var array Get parameters which will be added to URL */
+    public $getParams = array();
+
 
     /**
 	 * Конструктор
@@ -102,7 +105,7 @@ class Pager implements iModuleViewable
      * @param string 	$url_prefix		Url prefix for pagination links
      * @param number 	$rows_count 	Общее количество строк данных
 	 */
-	public function __construct( $current_page = NULL, $page_size = NULL, $url_prefix = NULL, $rows_count = NULL )
+	public function __construct( $current_page = NULL, $page_size = NULL, $url_prefix = NULL, $rows_count = NULL, $getParams = NULL )
 	{	
 		// TODO убрать
 		// Если переданна требуемая страница
@@ -125,6 +128,8 @@ class Pager implements iModuleViewable
 
 		// Рассчитаем параметры вывода
 		$this->update($rows_count);
+
+        $this->getParams = $getParams;
 	}
 
 	/**
@@ -234,6 +239,13 @@ class Pager implements iModuleViewable
 			if ($n!='...'){
                 $url = url()->build( $this->url_prefix, $n ).'/';
                 if ($n==1) $url = url()->build( $this->url_prefix );
+                if (!empty($this->getParams)) {
+                    $url .= '?';
+                    foreach($this->getParams as $parameterIndex => $parameterValue) {
+                        $url .= $parameterIndex.'='.$parameterValue.'&';
+                    }
+                    $url = substr($url, 0, strlen($url) - 1);
+                }
                 // Сформируем представление
                 $html .= m('pager')	// Получим модуль постраничного вывода
                     ->set( 'class',$active  ) 	// Если это текущая страница
