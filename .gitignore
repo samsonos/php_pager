@@ -1,5 +1,10 @@
-cache/*
-.svn*
+.buildpath
+.project
 .settings*
-.project*
-.buildpath*
+.idea/*
+cache/*
+vendor/*
+cms/*
+upload/*
+composer.lock
+composer.phar
