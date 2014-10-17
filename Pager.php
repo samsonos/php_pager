@@ -219,9 +219,17 @@ class Pager implements iModuleViewable
 
         // If there is previous page - render button
 		if ($this->prev != 0) {
+            $url = url()->build( $this->url_prefix, $this->prev);
+            if (!empty($this->getParams)) {
+                $url .= '?';
+                foreach($this->getParams as $parameterIndex => $parameterValue) {
+                    $url .= $parameterIndex.'='.$parameterValue.'&';
+                }
+                $url = substr($url, 0, strlen($url) - 1);
+            }
             $html .= m('pager')
                 ->desc($this->prevTitle)
-                ->url(url()->build( $this->url_prefix, $this->prev))
+                ->url($url)
                 ->output('prev_li.php');
         }
 		
@@ -238,7 +246,11 @@ class Pager implements iModuleViewable
 
 			if ($n!='...'){
                 $url = url()->build( $this->url_prefix, $n ).'/';
-                if ($n==1) $url = url()->build( $this->url_prefix );
+                if ($n==1) {
+                    $url = url()->build( $this->url_prefix );
+                } else {
+                    $url = substr($url, 0, strlen($url) - 1);
+                }
                 if (!empty($this->getParams)) {
                     $url .= '?';
                     foreach($this->getParams as $parameterIndex => $parameterValue) {
@@ -259,9 +271,17 @@ class Pager implements iModuleViewable
 
         // If there is next page - render button
 		if ($this->next != 0) {
+            $url = url()->build( $this->url_prefix, $this->next);
+            if (!empty($this->getParams)) {
+                $url .= '?';
+                foreach($this->getParams as $parameterIndex => $parameterValue) {
+                    $url .= $parameterIndex.'='.$parameterValue.'&';
+                }
+                $url = substr($url, 0, strlen($url) - 1);
+            }
             $html .= m('pager')
                 ->desc($this->nextTitle)
-                ->url(url()->build( $this->url_prefix, $this->next))
+                ->url($url)
                 ->output('next_li.php');
         }
 		
