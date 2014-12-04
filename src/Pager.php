@@ -105,7 +105,7 @@ class Pager implements iModuleViewable
      * @param string 	$url_prefix		Url prefix for pagination links
      * @param number 	$rows_count 	Общее количество строк данных
 	 */
-	public function __construct( $current_page = NULL, $page_size = NULL, $url_prefix = NULL, $rows_count = NULL, $getParams = NULL )
+	public function __construct( $current_page = NULL, $page_size = NULL, $url_prefix = NULL, $rows_count = NULL, $getParams = array() )
 	{	
 		// TODO убрать
 		// Если переданна требуемая страница
@@ -251,7 +251,7 @@ class Pager implements iModuleViewable
                 } else {
                     $url = substr($url, 0, strlen($url) - 1);
                 }
-                if (!empty($this->getParams)) {
+                if (!empty($this->getParams) && is_array($this->getParams)) {
                     $url .= '?';
                     foreach($this->getParams as $parameterIndex => $parameterValue) {
                         $url .= $parameterIndex.'='.$parameterValue.'&';
@@ -272,7 +272,7 @@ class Pager implements iModuleViewable
         // If there is next page - render button
 		if ($this->next != 0) {
             $url = url()->build( $this->url_prefix, $this->next);
-            if (!empty($this->getParams)) {
+            if (!empty($this->getParams) && is_array($this->getParams)) {
                 $url .= '?';
                 foreach($this->getParams as $parameterIndex => $parameterValue) {
                     $url .= $parameterIndex.'='.$parameterValue.'&';
