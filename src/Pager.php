@@ -228,9 +228,10 @@ class Pager implements iModuleViewable
                 $url = substr($url, 0, strlen($url) - 1);
             }
             $html .= m('pager')
+                ->view('prev_li')
                 ->desc($this->prevTitle)
                 ->url($url)
-                ->output('prev_li.php');
+                ->output();
         }
 		
 		
@@ -260,10 +261,11 @@ class Pager implements iModuleViewable
                 }
                 // Сформируем представление
                 $html .= m('pager')	// Получим модуль постраничного вывода
+                    ->view($view)
                     ->set( 'class',$active  ) 	// Если это текущая страница
                     ->set( 'page_view', $p )  	// Установим представление
                     ->set( 'url',  $url)// Установим "правильную" ссылку
-                    ->output($view);// Выведем представление
+                    ->output();// Выведем представление
             } else {
                 $html.='<li><span>...</span></li>';
             }
@@ -280,9 +282,10 @@ class Pager implements iModuleViewable
                 $url = substr($url, 0, strlen($url) - 1);
             }
             $html .= m('pager')
+                ->view('next_li')
                 ->desc($this->nextTitle)
                 ->url($url)
-                ->output('next_li.php');
+                ->output();
         }
 		
 		// Вернем то что получили
