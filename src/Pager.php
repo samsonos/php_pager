@@ -240,7 +240,7 @@ class Pager implements iModuleViewable, PagerInterface
 
 
         // Пункт меню для вывода всех строк данных
-        $allHTML = class_exists('samson\i18n\i18n') ? t('Все', true) : 'Все';
+        $allHTML = class_exists('samsonphp\i18n\i18n', false) ? t('Все', true) : 'Все';
         $html .= '<li><a class="__samson_pager_li ' . $active .
             ' __samson_pager_all" href="' . url()->build($this->url_prefix, 0) . '/">' . $allHTML . '</a></li>';
 
