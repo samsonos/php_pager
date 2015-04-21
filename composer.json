@@ -1,21 +1,24 @@
 {
-    "name":"samsonos/php_pager",
-    "author":"Vitaly Iegorov <egorov@samsonos.com>",   
-    "require":{
-		"samsonos/php_activerecord": "*"
-	},
-    "license":"Open Software License (OSL) v 3.0",
-    "homepage":"http://samsonphp.com/",
-	"require-dev": {
-        "phpunit/phpunit": "4.1.*",
-        "phpunit/dbunit": ">=1.2"
-    },
-    "license":"Open Software License (OSL) v 3.0",
-	"homepage":"http://samsonos.com/",
-    "autoload": {
-        "classmap": ["src/"],
-        "psr-0": {
-            "samsonos\\pager\\": "src/"
-        }        
+  "name": "samsonos/php_pager",
+  "author": "Vitaly Iegorov <egorov@samsonos.com>",
+  "require": {
+    "samsonos/php_activerecord": "*"
+  },
+  "license": "Open Software License (OSL) v 3.0",
+  "homepage": "http://samsonphp.com/",
+  "require": {
+    "samsonframework/base": "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "4.1.*",
+    "phpunit/dbunit": ">=1.2"
+  },
+  "license": "Open Software License (OSL) v 3.0",
+  "homepage": "http://samsonos.com/",
+  "autoload": {
+    "classmap": ["src/"],
+    "psr-0": {
+      "samsonos\\pager\\": "src/"
     }
+  }
 }
