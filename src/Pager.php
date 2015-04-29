@@ -133,7 +133,7 @@ class Pager implements iModuleViewable, PagerInterface
         // Рассчитаем параметры вывода
         $this->update($rowsCount);
 
-        $this->getParams = $getParams;
+        $this->getParams = !empty($getParams) ? $getParams : $_GET;
     }
 
     /**
