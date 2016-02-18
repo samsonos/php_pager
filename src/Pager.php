@@ -233,8 +233,8 @@ class Pager implements iModuleViewable, PagerInterface
             $url .= $this->buildGetParameters();
             $html .= m('pager')
                 ->view('prev_li')
-                ->set('desc', $this->prevTitle)
-                ->set('url', $url)
+                ->set($this->prevTitle, 'desc')
+                ->set($url, 'url')
                 ->output();
         }
 
@@ -256,9 +256,9 @@ class Pager implements iModuleViewable, PagerInterface
                 // Сформируем представление
                 $html .= m('pager')// Получим модуль постраничного вывода
                 ->view($view)
-                    ->set('class', $active)// Если это текущая страница
-                    ->set('page_view', $p)// Установим представление
-                    ->set('url', $url)// Установим "правильную" ссылку
+                    ->set($active, 'class')// Если это текущая страница
+                    ->set($p, 'page_view')// Установим представление
+                    ->set($url, 'url')// Установим "правильную" ссылку
                     ->output();// Выведем представление
             } else {
                 $html .= '<li><span>...</span></li>';
@@ -272,8 +272,8 @@ class Pager implements iModuleViewable, PagerInterface
             $url .= $this->buildGetParameters();
             $html .= m('pager')
                 ->view('next_li')
-                ->set('desc', $this->nextTitle)
-                ->set('url', $url)
+                ->set($this->nextTitle, 'desc')
+                ->set($url, 'url')
                 ->output();
         }
 
