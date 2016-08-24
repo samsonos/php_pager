@@ -1,7 +1,7 @@
 <?php
 namespace samson\pager;
 
-use samson\core\iModuleViewable;
+use samsonframework\core\RenderInterface;
 use samsonframework\pager\PagerInterface;
 
 /**
@@ -12,7 +12,7 @@ use samsonframework\pager\PagerInterface;
  *
  * @version 0.0.2
  */
-class Pager implements iModuleViewable, PagerInterface
+class Pager implements RenderInterface, PagerInterface
 {
     /** Идентификатор вывода всех строк данных */
     const ALL_DATA = 0;
