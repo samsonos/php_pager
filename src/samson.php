@@ -1,7 +1,6 @@
 <?php
 namespace samson\pager;
 
-use samson\core\CompressableExternalModule;
 use samson\core\iModuleViewable;
 
 /**
