@@ -1,7 +1,7 @@
 <?php
 namespace samson\pager;
 
-use samson\core\iModuleViewable;
+use samson\core\CompressableExternalModule;
 
 /**
  * Интерфейс для подключения модуля в ядро фреймворка SamsonPHP
